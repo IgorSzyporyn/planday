@@ -31,9 +31,9 @@
     "changelog:minor": "npm run changelog:clean && changelog -m && npm run github:commit-changelog",
     "changelog:patch": "npm run changelog:clean && changelog -p && npm run github:commit-changelog",
     "changelog:clean": "rimraf CHANGELOG.md",
-    "release:major": "npm run changelog:major && npm run github:release",
-    "release:minor": "npm run changelog:minor && npm run github:release",
-    "release:patch": "npm run changelog:patch && npm run github:release"
+    "release:major": "npm run changelog:major && npm version major && npm run github:release",
+    "release:minor": "npm run changelog:minor && npm version minor && npm run github:release",
+    "release:patch": "npm run changelog:patch && npm version patch && npm run github:release"
   },
   "eslintConfig": {
     "extends": "react-app"
