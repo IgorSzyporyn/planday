@@ -1,0 +1,6 @@
+{
+  "*.@(ts|tsx)": [
+    "npm run test --findRelatedTests",
+    "npm run format"
+  ]
+}
