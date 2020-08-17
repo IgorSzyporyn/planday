@@ -1,4 +1,4 @@
-### 0.2.0 (2020-08-17)
+#### 0.1.1 (2020-08-17)
 
 ##### Documentation Changes
 
@@ -26,8 +26,10 @@
 
 ##### Bug Fixes
 
+* **package:**
+  *  forgot to bump npm version number for tagged branches (40c700bc)
+  *  had to add --no-verify to commit because of uppercase filename for changelog (720f0699)
 *  prettier change a bunch of files (3d42728a)
 *  better global styles and simpler (e1364657)
-* **package:**  had to add --no-verify to commit because of uppercase filename for changelog (720f0699)
 * **husky:**  fixed test script reference error (1722b697)
 
