@@ -1,0 +1,8 @@
+{
+  "hooks": {
+    "pre-commit": "lint-staged",
+    "pre-push": "npm run test:types",
+    "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+    "post-commit": "git update-index --again"
+  }
+}
