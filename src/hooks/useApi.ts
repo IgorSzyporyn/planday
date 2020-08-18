@@ -8,6 +8,7 @@ export type UseApiType = {
   error: boolean
   loading: boolean
   result: ApiQueryResult | null
+  touched: boolean
 }
 
 export const useApi = () => {
@@ -15,12 +16,19 @@ export const useApi = () => {
     error: false,
     loading: false,
     result: null,
+    touched: false,
   })
   const { query }: QueryStoreType = useStore(QueryStore)
 
   useEffect(() => {
     const fetchData = async () => {
+      const touched = !!query
+
       setResult((state) => ({ ...state, loading: true, result: null }))
+
+      if (touched) {
+        setResult((state) => ({ ...state, touched: true }))
+      }
 
       const _result = await api(flickrQuery, query)
 

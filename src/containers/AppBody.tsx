@@ -7,6 +7,7 @@ import { GridOnIcon } from '../components/icons/GridOnIcon/GridOnIcon'
 import { LoadingIcon } from '../components/icons/LoadingIcon/LoadingIcon'
 import { PROJECT_ID } from '../constants'
 import { useApi } from '../hooks/useApi'
+import { breakpoint } from '../theme'
 
 const Wrapper = styled.main`
   padding-bottom: calc(var(--gutter) * 3);
@@ -55,11 +56,25 @@ const LoadingWrapper = styled(motion.div)`
   flex-direction: column;
   justify-content: center;
   left: calc(50% - calc((var(--spacing) * 15) / 2));
-  position: absolute;
-  top: calc(var(--spacing) * 3);
+  position: fixed;
+  top: calc(var(--spacing) * 30);
 
   & > svg {
     width: calc(var(--spacing) * 15);
+  }
+`
+
+const NoResultsWrapper = styled(motion.div)`
+  font-size: 1.4rem;
+  display: flex;
+  justify-content: center;
+  left: calc(50% - calc((var(--spacing) * 15) / 2));
+  position: fixed;
+  top: calc(var(--spacing) * 40);
+  width: calc(var(--spacing) * 15);
+
+  @media ${breakpoint.medium} {
+    font-size: 1.6rem;
   }
 `
 
@@ -67,7 +82,7 @@ type ViewModeTypes = 'grid' | 'list'
 
 export const AppBody = () => {
   const [viewMode, setViewMode] = useState<ViewModeTypes>('grid')
-  const { loading, result } = useApi()
+  const { loading, result, touched } = useApi()
 
   const handleViewMode = () => {
     setViewMode(viewMode === 'list' ? 'grid' : 'list')
@@ -82,6 +97,11 @@ export const AppBody = () => {
   const loadingMotion = {
     hidden: { opacity: 0, y: -75, scale: 0 },
     show: { opacity: 1, y: 0, scale: 1, transition: { delay: 0.3 } },
+  }
+
+  const noResultsMotion = {
+    hidden: { opacity: 0, y: 75 },
+    show: { opacity: 1, y: 0 },
   }
 
   const dataGridMotion = {
@@ -152,6 +172,14 @@ export const AppBody = () => {
             Loading...
           </p>
         </LoadingWrapper>
+        <NoResultsWrapper
+          initial="hidden"
+          animate={touched && !loading && images.length === 0 ? 'show' : 'hidden'}
+          exit="exit"
+          variants={noResultsMotion}
+        >
+          Nothing To Show
+        </NoResultsWrapper>
         <DataGrid initial={false} animate="show" viewMode={viewMode} variants={dataGridMotion}>
           <AnimateSharedLayout>
             <AnimatePresence>
