@@ -31,7 +31,7 @@ const Border = styled(motion.hr)`
   border-bottom: 1px solid var(--color-border);
   border: 0 none;
   height: 0.1rem;
-  margin: 0 0 calc(var(--spacing-large) * 5) 0;
+  margin: 0 0 calc(var(--spacing-large) * 3) 0;
 `
 
 const Presentation = styled.div`
