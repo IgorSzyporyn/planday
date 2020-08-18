@@ -1,20 +1,20 @@
-import { useEffect, useState } from 'react'
 import { useStore } from 'laco-react'
-import { QueryStore, QueryStoreType } from '../stores/query'
+import { useEffect, useState } from 'react'
+import { api, ApiQueryResult } from '../api'
 import { flickrQuery } from '../api/flickr'
-import { ApiQueryResult, api } from '../api'
+import { QueryStore, QueryStoreType } from '../stores/query'
 
 export type UseApiType = {
+  error: boolean
   loading: boolean
   result: ApiQueryResult | null
-  error: boolean
 }
 
 export const useApi = () => {
   const [result, setResult] = useState<UseApiType>({
+    error: false,
     loading: false,
     result: null,
-    error: false,
   })
   const { query }: QueryStoreType = useStore(QueryStore)
 
@@ -29,9 +29,9 @@ export const useApi = () => {
       } else {
         setResult((state) => ({
           ...state,
+          error: true,
           loading: false,
           result: null,
-          error: true,
         }))
       }
     }

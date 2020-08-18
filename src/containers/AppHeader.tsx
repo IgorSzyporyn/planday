@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { SearchPanel } from '../components/SearchPanel/SearchPanel'
 import avatar from '../images/avatar.jpg'
 import { breakpoint } from '../theme'
-import { motion } from 'framer-motion'
 
 const Wrapper = styled.header`
-  padding-left: calc(var(--gutter) * 5);
-  padding-right: calc(var(--gutter) * 5);
-  padding-top: calc(var(--gutter) * 5);
-  position: sticky;
-  top: 0;
-  z-index: 99999;
   background-image: linear-gradient(
     180deg,
     var(--background-paper) 0%,
     var(--overlay-paper-dark) 77%,
     rgba(0, 0, 0, 0) 100%
   );
+  padding-left: calc(var(--gutter) * 5);
+  padding-right: calc(var(--gutter) * 5);
+  padding-top: calc(var(--gutter) * 5);
+  position: sticky;
+  top: 0;
+  z-index: 99999;
 `
 
 const BorderWrapper = styled.div`
@@ -27,25 +27,25 @@ const BorderWrapper = styled.div`
 `
 
 const Border = styled(motion.hr)`
-  margin: 0 0 calc(var(--spacing-large) * 5) 0;
-  height: 0.1rem;
-  border: 0 none;
   background-color: var(--color-border-light);
   border-bottom: 1px solid var(--color-border);
+  border: 0 none;
+  height: 0.1rem;
+  margin: 0 0 calc(var(--spacing-large) * 5) 0;
 `
 
 const Presentation = styled.div`
-  margin-bottom: calc(var(--gutter) * 5);
+  align-items: center;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  margin-bottom: calc(var(--gutter) * 3);
 `
 
 const Avatar = styled(motion.img)`
-  margin-right: var(--spacing-large);
   border-radius: 100%;
-  width: auto;
   height: 4rem;
+  margin-right: var(--spacing-large);
+  width: auto;
 
   @media ${breakpoint.medium} {
     height: 4.6rem;
@@ -57,9 +57,9 @@ const Avatar = styled(motion.img)`
 `
 
 const SearchMotion = styled.div`
-  overflow: hidden;
   margin-left: calc(var(--gutter) * -5);
   margin-right: calc(var(--gutter) * -5);
+  overflow: hidden;
   padding-left: calc(var(--gutter) * 5);
   padding-right: calc(var(--gutter) * 5);
 `

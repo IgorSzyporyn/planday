@@ -2,8 +2,8 @@ import React, { ReactNode } from 'react'
 import styled from 'styled-components'
 
 const Wrapper = styled.section`
-  border-radius: var(--border-radius);
   background-color: var(--background-paper);
+  border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
   max-width: 1140px;
   width: 100%;

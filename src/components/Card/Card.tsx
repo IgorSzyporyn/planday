@@ -1,51 +1,51 @@
+import { motion, MotionProps } from 'framer-motion'
 import React, { CSSProperties } from 'react'
 import styled from 'styled-components'
 import { ApiQueryData } from '../../api'
-import { motion, MotionProps } from 'framer-motion'
+import { breakpoint } from '../../theme'
 import { device } from '../../theme/device'
 import { OpenLinkIcon } from '../icons/OpenLinkIcon/OpenLinkIcon'
-import { breakpoint } from '../../theme'
 
 const Wrapper = styled(motion.article)`
-  position: relative;
-  padding-top: 56.25%;
-  border-radius: var(--border-radius);
-  overflow: hidden;
-  background-size: cover;
   background-color: var(--background-paper);
+  background-size: cover;
+  border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
+  overflow: hidden;
+  padding-top: 56.25%;
+  position: relative;
   width: 100%;
 `
 
 const OpenLink = styled.a`
   position: absolute;
-  top: calc(var(--gutter) * 2);
   right: calc(var(--gutter) * 2);
+  top: calc(var(--gutter) * 2);
 `
 
 const Panel = styled.section`
-  position: absolute;
-  display: flex;
   align-items: center;
-  bottom: 0;
-  left: 0;
-  right: 0;
   background-color: var(--overlay-paper-light);
+  bottom: 0;
+  display: flex;
+  left: 0;
   padding: 5%;
+  position: absolute;
+  right: 0;
 
   @media ${breakpoint.medium} {
-    padding: 3%;
     background-color: var(--overlay-paper);
+    padding: 3%;
   }
 `
 
 const Avatar = styled.div`
+  background-size: cover;
   border-radius: 100%;
+  display: none;
+  margin-right: var(--spacing-large);
   min-height: 2.4rem;
   min-width: 2.4rem;
-  background-size: cover;
-  margin-right: var(--spacing-large);
-  display: none;
 
   @media ${device.mobileM} {
     display: block;
@@ -59,17 +59,17 @@ const Avatar = styled.div`
   }
 `
 const Info = styled.div`
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 `
 
 const Title = styled.h4`
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   color: var(--color-text);
   display: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
   @media ${breakpoint.medium} {
     color: var(--color-text-bright);
@@ -78,14 +78,14 @@ const Title = styled.h4`
 `
 
 const AuthorLink = styled.a`
-  text-decoration: none;
   color: var(--color-text-light);
+  text-decoration: none;
 `
 
 export const Card = ({
   author,
-  authorUri,
   authorAvatar,
+  authorUri,
   link,
   published,
   title,

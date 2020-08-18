@@ -9,11 +9,11 @@ import { breakpoint, darkTheme, lightTheme } from './theme'
 const AppWrapper = styled.div`
   background-color: var(--background-default);
   color: var(--color-text-main);
+  display: flex;
+  font-size: 1.4rem;
+  justify-content: center;
   min-height: 100vh;
   padding: 0;
-  font-size: 1.4rem;
-  display: flex;
-  justify-content: center;
 
   @media ${breakpoint.large} {
     padding: 4vh 4vw 0;

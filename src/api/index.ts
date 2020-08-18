@@ -1,19 +1,19 @@
 import { HTMLAttributes } from 'react'
 
 export type ApiQueryData = {
-  id?: string
   author?: string
-  authorUri?: string
   authorAvatar?: string
+  authorUri?: string
+  id?: string
   link?: HTMLAttributes<HTMLAnchorElement> & { href: string }
   published?: string
   title?: string
 }
 
 export type ApiQueryResult = {
-  title?: string
-  link?: HTMLAttributes<HTMLAnchorElement> & { href: string }
   data: ApiQueryData[]
+  link?: HTMLAttributes<HTMLAnchorElement> & { href: string }
+  title?: string
 } | null
 
 export type ApiQueryPromise = Promise<ApiQueryResult>

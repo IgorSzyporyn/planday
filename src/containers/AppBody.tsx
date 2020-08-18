@@ -1,20 +1,19 @@
-import { AnimateSharedLayout, AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Card } from '../components/Card/Card'
 import { GridOffIcon } from '../components/icons/GridIcon/GridOffIcon'
 import { GridOnIcon } from '../components/icons/GridOnIcon/GridOnIcon'
-import { useApi } from '../hooks/useApi'
 import { LoadingIcon } from '../components/icons/LoadingIcon/LoadingIcon'
-import { breakpoint } from '../theme'
 import { PROJECT_ID } from '../constants'
+import { useApi } from '../hooks/useApi'
 
 const Wrapper = styled.main`
-  position: relative;
   padding-bottom: calc(var(--gutter) * 3);
   padding-left: calc(var(--gutter) * 5);
   padding-right: calc(var(--gutter) * 5);
   padding-top: calc(var(--gutter) * 3);
+  position: relative;
 `
 
 const UtilityBar = styled(motion.section)`
@@ -33,6 +32,7 @@ const DataGrid = styled(motion.section)`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+
   & > div {
     flex-basis: ${({ viewMode }: { viewMode: ViewModeTypes }) =>
       viewMode === 'list' ? '100%' : 'calc(50% - var(--spacing))'};
@@ -51,12 +51,12 @@ const DataGrid = styled(motion.section)`
 `
 
 const LoadingWrapper = styled(motion.div)`
-  position: absolute;
-  left: calc(50% - calc((var(--spacing) * 15) / 2));
-  top: calc(var(--spacing) * 3);
   display: flex;
   flex-direction: column;
   justify-content: center;
+  left: calc(50% - calc((var(--spacing) * 15) / 2));
+  position: absolute;
+  top: calc(var(--spacing) * 3);
 
   & > svg {
     width: calc(var(--spacing) * 15);
@@ -67,7 +67,7 @@ type ViewModeTypes = 'grid' | 'list'
 
 export const AppBody = () => {
   const [viewMode, setViewMode] = useState<ViewModeTypes>('grid')
-  const { loading, result, error } = useApi()
+  const { loading, result } = useApi()
 
   const handleViewMode = () => {
     setViewMode(viewMode === 'list' ? 'grid' : 'list')

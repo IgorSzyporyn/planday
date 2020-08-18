@@ -12,29 +12,29 @@ const Wrapper = styled.section`
 `
 
 const Label = styled.label`
-  position: relative;
   flex-basis: 100%;
+  position: relative;
 `
 
 const Input = styled.input`
-  width: 100%;
-  box-sizing: border-box;
-  border: 0 none;
-  outline: 0 none;
   background-color: transparent;
-  font-size: 1em;
+  border: 0 none;
+  box-sizing: border-box;
   color: var(--color-text-light);
-  padding-top: var(--spacing-large);
+  font-size: 1em;
+  outline: 0 none;
   padding-bottom: var(--spacing-large);
   padding-left: 3.2rem;
+  padding-top: var(--spacing-large);
+  width: 100%;
 
   @media ${device.tablet} {
     padding-left: 3.6rem;
   }
 `
 const InputIcon = styled(SearchIcon)`
-  position: absolute;
   left: 0.4rem;
+  position: absolute;
   top: 1.2rem;
 
   @media ${breakpoint.medium} {
@@ -69,9 +69,9 @@ export const SearchPanel = () => {
           autoComplete="off"
           id={inputId}
           name={inputId}
+          onBlur={() => setActive(false)}
           onChange={(event) => setInputvalue(event.target.value)}
           onFocus={() => setActive(true)}
-          onBlur={() => setActive(false)}
           placeholder="Enter keywords to search for images..."
           value={inputValue}
         />

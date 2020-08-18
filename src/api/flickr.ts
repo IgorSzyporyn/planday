@@ -1,6 +1,6 @@
-import { xml2json } from '../utils/xml-to-json'
-import { ApiQueryResult, ApiQueryData } from '.'
 import { HTMLAttributes } from 'react'
+import { ApiQueryData, ApiQueryResult } from '.'
+import { xml2json } from '../utils/xml-to-json'
 
 const CORS_PROXY_URL = 'https://cors-anywhere.herokuapp.com/'
 
@@ -8,11 +8,11 @@ const CORS_PROXY_URL = 'https://cors-anywhere.herokuapp.com/'
 const flikrApiUrl = 'https://www.flickr.com/services/feeds/photos_public.gne'
 
 type FlickrElementType = {
-  type: string
+  attributes: HTMLAttributes<HTMLAnchorElement> & { href: string }
+  elements: FlickrElementType[]
   name: string
   text: string
-  elements: FlickrElementType[]
-  attributes: HTMLAttributes<HTMLAnchorElement> & { href: string }
+  type: string
 }
 
 export function convertFlickrResultToApiResult(source: Record<string, any>) {

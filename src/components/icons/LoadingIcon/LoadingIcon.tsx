@@ -1,4 +1,4 @@
-import React, { useContext, CSSProperties } from 'react'
+import React, { CSSProperties, useContext } from 'react'
 import { ThemeContext } from 'styled-components'
 import { Theme } from '../../../theme'
 import { IconProps } from '../BaseIcon/BaseIcon'
@@ -14,74 +14,74 @@ export const LoadingIcon = (props: IconProps) => {
 
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 100 100"
-      style={style}
       preserveAspectRatio="xMidYMid"
+      style={style}
+      viewBox="0 0 100 100"
+      xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
       <rect x="17.5" y="30" width="15" height="40" fill={theme.palette.primary.main}>
         <animate
           attributeName="y"
-          repeatCount="indefinite"
-          dur="1s"
-          calcMode="spline"
-          keyTimes="0;0.5;1"
-          values="18;30;30"
-          keySplines="0 0.5 0.5 1;0 0.5 0.5 1"
           begin="-0.2s"
+          calcMode="spline"
+          dur="1s"
+          keySplines="0 0.5 0.5 1;0 0.5 0.5 1"
+          keyTimes="0;0.5;1"
+          repeatCount="indefinite"
+          values="18;30;30"
         ></animate>
         <animate
           attributeName="height"
-          repeatCount="indefinite"
-          dur="1s"
-          calcMode="spline"
-          keyTimes="0;0.5;1"
-          values="64;40;40"
-          keySplines="0 0.5 0.5 1;0 0.5 0.5 1"
           begin="-0.2s"
+          calcMode="spline"
+          dur="1s"
+          keySplines="0 0.5 0.5 1;0 0.5 0.5 1"
+          keyTimes="0;0.5;1"
+          repeatCount="indefinite"
+          values="64;40;40"
         ></animate>
       </rect>
       <rect x="42.5" y="30" width="15" height="40" fill={theme.palette.secondary.main}>
         <animate
           attributeName="y"
-          repeatCount="indefinite"
-          dur="1s"
-          calcMode="spline"
-          keyTimes="0;0.5;1"
-          values="20.999999999999996;30;30"
-          keySplines="0 0.5 0.5 1;0 0.5 0.5 1"
           begin="-0.1s"
+          calcMode="spline"
+          dur="1s"
+          keySplines="0 0.5 0.5 1;0 0.5 0.5 1"
+          keyTimes="0;0.5;1"
+          repeatCount="indefinite"
+          values="20.999999999999996;30;30"
         ></animate>
         <animate
           attributeName="height"
-          repeatCount="indefinite"
-          dur="1s"
-          calcMode="spline"
-          keyTimes="0;0.5;1"
-          values="58.00000000000001;40;40"
-          keySplines="0 0.5 0.5 1;0 0.5 0.5 1"
           begin="-0.1s"
+          calcMode="spline"
+          dur="1s"
+          keySplines="0 0.5 0.5 1;0 0.5 0.5 1"
+          keyTimes="0;0.5;1"
+          repeatCount="indefinite"
+          values="58.00000000000001;40;40"
         ></animate>
       </rect>
       <rect x="67.5" y="30" width="15" height="40" fill={theme.palette.success.main}>
         <animate
           attributeName="y"
-          repeatCount="indefinite"
-          dur="1s"
           calcMode="spline"
-          keyTimes="0;0.5;1"
-          values="20.999999999999996;30;30"
+          dur="1s"
           keySplines="0 0.5 0.5 1;0 0.5 0.5 1"
+          keyTimes="0;0.5;1"
+          repeatCount="indefinite"
+          values="20.999999999999996;30;30"
         ></animate>
         <animate
           attributeName="height"
-          repeatCount="indefinite"
-          dur="1s"
           calcMode="spline"
-          keyTimes="0;0.5;1"
-          values="58.00000000000001;40;40"
+          dur="1s"
           keySplines="0 0.5 0.5 1;0 0.5 0.5 1"
+          keyTimes="0;0.5;1"
+          repeatCount="indefinite"
+          values="58.00000000000001;40;40"
         ></animate>
       </rect>
     </svg>

@@ -1,6 +1,6 @@
 import React, { SVGProps, useContext } from 'react'
 import styled, { ThemeContext } from 'styled-components'
-import { ThemePaletteVariantType, Theme, ThemePaletteVariants } from '../../../theme'
+import { Theme, ThemePaletteVariants, ThemePaletteVariantType } from '../../../theme'
 import { device } from '../../../theme/device'
 
 type WithPalette = {
@@ -52,8 +52,8 @@ export const Icon = ({ active, children, ...rest }: IconProps) => {
 
 export type IconProps = {
   active?: boolean
-  variant?: ThemePaletteVariantType
   hover?: boolean
+  variant?: ThemePaletteVariantType
 } & SVGProps<SVGSVGElement>
 
 export const BaseIcon = ({ hover, variant, ...rest }: IconProps) => {
