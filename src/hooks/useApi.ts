@@ -22,11 +22,11 @@ export const useApi = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const touched = !!query
+      const touched = query !== ''
 
       setResult((state) => ({ ...state, loading: true, result: null }))
 
-      if (touched) {
+      if (!touched) {
         setResult((state) => ({ ...state, touched: true }))
       }
 
@@ -44,10 +44,10 @@ export const useApi = () => {
       }
     }
 
-    if (query) {
+    if (query || !result.touched) {
       fetchData()
     }
-  }, [query, setResult])
+  }, [query, result.touched, setResult])
 
   return result
 }

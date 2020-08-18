@@ -29,10 +29,6 @@ export const api = async (depInjection: ApiDependencyInjection, query: string) =
 
   // For instance it can be nice to leave the responsibility of bailing early and managing
   // response and just focus on fetching and normalizing data to return (or return null)
-  if (!query) {
-    return null
-  }
-
   let result = null
 
   const promise = await depInjection(query)

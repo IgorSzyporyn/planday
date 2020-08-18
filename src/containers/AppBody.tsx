@@ -112,12 +112,6 @@ export const AppBody = () => {
     show: { opacity: 1 },
   }
 
-  const defaultTitleMotion = {
-    initial: { opacity: 0, y: -150 },
-    animate: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: -150 },
-  }
-
   const titleMotion = {
     hidden: { opacity: 0, y: 350 },
     show: { opacity: 1, y: 0 },
@@ -129,19 +123,6 @@ export const AppBody = () => {
     <div>
       <Wrapper>
         <UtilityBar>
-          <AnimatePresence>
-            {!hasTitle && !loading && (
-              <motion.h3
-                key={`${PROJECT_ID}-default-title`}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-                variants={defaultTitleMotion}
-              >
-                {'Search by tags on Flickr'}
-              </motion.h3>
-            )}
-          </AnimatePresence>
           <motion.h3
             key={`${PROJECT_ID}-title`}
             initial="initial"

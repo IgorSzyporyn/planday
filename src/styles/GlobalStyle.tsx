@@ -6,10 +6,11 @@ import { device } from '../theme/device'
 
 export const GlobalStyle = createGlobalStyle`
   html {
+    box-sizing: border-box;
     font-size: 62.5%;
     height: 100%;
     min-height: 100%;
-    box-sizing: border-box;
+    scroll-behavior: smooth;
   }
 
   html * {
@@ -26,15 +27,15 @@ export const GlobalStyle = createGlobalStyle`
 
   h1 {
     font-size: 1.6rem;
-    margin-top: 0.2em;
-    margin-bottom: 0.2em;
     font-weight: 400;
+    margin-bottom: 0.2em;
+    margin-top: 0.2em;
   }
 
   h2 {
     font-size: 1.3rem;
-    margin-bottom: 0.4em;
     font-weight: 300;
+    margin-bottom: 0.4em;
   }
 
   h3 {

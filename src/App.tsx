@@ -16,14 +16,14 @@ const AppWrapper = styled.div`
   padding: 0;
 
   @media ${breakpoint.large} {
-    padding: 4vh 4vw 0;
+    padding: 70px 4vw 0;
   }
 
   & > * {
     min-height: 100vh;
 
     @media ${breakpoint.large} {
-      min-height: 96vh;
+      min-height: calc(100vh - 70px);
     }
   }
 `

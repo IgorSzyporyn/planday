@@ -1,23 +1,19 @@
-import { motion } from 'framer-motion'
+import { motion, useViewportScroll } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { SearchPanel } from '../components/SearchPanel/SearchPanel'
 import avatar from '../images/avatar.jpg'
-import { breakpoint } from '../theme'
+import { breakpoint, getCurrentBreakpoint } from '../theme'
 
 const Wrapper = styled.header`
-  background-image: linear-gradient(
-    180deg,
-    var(--background-paper) 0%,
-    var(--overlay-paper-dark) 77%,
-    rgba(0, 0, 0, 0) 100%
-  );
+  background-color: var(--overlay-paper);
   padding-left: calc(var(--gutter) * 5);
   padding-right: calc(var(--gutter) * 5);
   padding-top: calc(var(--gutter) * 5);
+  margin-bottom: calc(var(--gutter) * 3);
   position: sticky;
   top: 0;
-  z-index: 99999;
+  z-index: 1000;
 `
 
 const BorderWrapper = styled.div`
@@ -31,28 +27,32 @@ const Border = styled(motion.hr)`
   border-bottom: 1px solid var(--color-border);
   border: 0 none;
   height: 0.1rem;
-  margin: 0 0 calc(var(--spacing-large) * 3) 0;
+  margin: 0;
 `
 
-const Presentation = styled.div`
+const Presentation = styled(motion.div)`
   align-items: center;
   display: flex;
   flex-direction: row;
-  margin-bottom: calc(var(--gutter) * 3);
+  margin-bottom: var(--spacing);
 `
 
-const Avatar = styled(motion.img)`
+const Avatar = styled(motion.a)`
   border-radius: 100%;
-  height: 4rem;
   margin-right: var(--spacing-large);
-  width: auto;
+  overflow: hidden;
 
-  @media ${breakpoint.medium} {
-    height: 4.6rem;
-  }
+  & > img {
+    height: 4rem;
+    width: auto;
 
-  @media ${breakpoint.large} {
-    height: 5.8rem;
+    @media ${breakpoint.medium} {
+      height: 4.6rem;
+    }
+
+    @media ${breakpoint.large} {
+      height: 5.8rem;
+    }
   }
 `
 
@@ -66,17 +66,39 @@ const SearchMotion = styled.div`
 
 export const AppHeader = () => {
   const [mounted, setMounted] = useState(false)
+  const [avatarTop, setAvatarTop] = useState(false)
+  const [infoLeft, setInfoLeft] = useState(false)
+  const { scrollY } = useViewportScroll()
 
   useEffect(() => {
     setMounted(true)
   }, [])
 
+  useEffect(() => {
+    scrollY.onChange((y) => {
+      if (y >= 70) {
+        const deltaAvatar = y - 70
+
+        setAvatarTop(true)
+
+        if (deltaAvatar >= 25) {
+          setInfoLeft(true)
+        } else {
+          setInfoLeft(false)
+        }
+      } else {
+        setAvatarTop(false)
+        setInfoLeft(false)
+      }
+    })
+  }, [scrollY])
+
   const titleMotion = {
-    hidden: { opacity: 0, y: -80 },
+    hidden: { opacity: 0, y: -180 },
     show: {
       y: 0,
       opacity: 1,
-      transition: { type: 'spring', stiffness: 400, mass: 1.1, damping: 10 },
+      transition: { type: 'spring', stiffness: 200, mass: 1.1, damping: 10 },
     },
   }
 
@@ -85,8 +107,22 @@ export const AppHeader = () => {
     show: {
       y: 0,
       opacity: 1,
-      transition: { type: 'spring', stiffness: 400, delay: 0.2, mass: 1.1, damping: 10 },
+      transition: { type: 'spring', stiffness: 200, delay: 0.2, mass: 1.1, damping: 10 },
     },
+  }
+
+  const { breakpoint } = getCurrentBreakpoint()
+  let infoMotionLeft = -52
+
+  if (breakpoint === 'medium') {
+    infoMotionLeft = -57
+  } else if (breakpoint === 'large') {
+    infoMotionLeft = -72
+  }
+
+  const infoMotion = {
+    normal: { x: 0 },
+    moveleft: { x: infoMotionLeft },
   }
 
   const avatarMotion = {
@@ -94,8 +130,13 @@ export const AppHeader = () => {
     show: {
       y: 0,
       opacity: 1,
-      transition: { type: 'spring', stiffness: 400, delay: 0.4, mass: 1.1, damping: 10 },
+      transition: { type: 'spring', stiffness: 300, delay: 0.4, mass: 1.1, damping: 10 },
     },
+  }
+
+  const avatarImageMotion = {
+    movetop: { y: -100 },
+    moveback: { y: 0 },
   }
 
   const borderMotion = {
@@ -105,21 +146,34 @@ export const AppHeader = () => {
 
   const searchMotion = {
     hidden: { x: -2250, opacity: 0 },
-    show: { x: 0, opacity: 1, transition: { delay: 0.8 } },
+    show: { x: 0, opacity: 1, transition: { delay: 1.2 } },
   }
 
   return (
     <Wrapper>
       <Presentation>
-        <a href="https://github.com/IgorSzyporyn/planday" rel="noopener noreferrer" target="_blank">
-          <Avatar
+        <Avatar
+          initial={false}
+          animate={mounted ? 'show' : 'hidden'}
+          href="https://github.com/IgorSzyporyn/planday"
+          rel="noopener noreferrer"
+          target="_blank"
+          title="Link to the repository with code"
+          variants={avatarMotion}
+        >
+          <motion.img
+            initial={false}
+            animate={avatarTop ? 'movetop' : 'moveback'}
+            alt="ISJ Avatar"
             src={avatar}
-            initial="hidden"
-            animate={mounted ? 'show' : 'hidden'}
-            variants={avatarMotion}
+            variants={avatarImageMotion}
           />
-        </a>
-        <div>
+        </Avatar>
+        <motion.div
+          initial={false}
+          animate={infoLeft ? 'moveleft' : 'normal'}
+          variants={infoMotion}
+        >
           <motion.h1 initial="hidden" animate={mounted ? 'show' : 'hidden'} variants={titleMotion}>
             Planday Code Challenge
           </motion.h1>
@@ -130,7 +184,7 @@ export const AppHeader = () => {
           >
             by Igor Szyporyn Jørgensen
           </motion.h2>
-        </div>
+        </motion.div>
       </Presentation>
       <SearchMotion>
         <motion.div initial="hidden" animate={mounted ? 'show' : 'hidden'} variants={searchMotion}>

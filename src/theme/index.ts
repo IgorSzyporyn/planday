@@ -1,4 +1,4 @@
-import { device } from './device'
+import { device, size } from './device'
 
 export type WithTheme<T = {}> = {
   theme: Theme
@@ -98,7 +98,7 @@ export const lightTheme: Theme = {
       dark: 'rgba(255,255,255,0.87)',
     },
     paper: {
-      main: 'rgba(250,250,250,0.65)',
+      main: 'rgba(250,250,250,0.7)',
       light: 'rgba(250,250,250,0.15)',
       dark: 'rgba(250,250,250,0.87)',
     },
@@ -154,7 +154,7 @@ export const darkTheme: Theme = {
   },
   overlay: {
     default: {
-      main: 'rgba(48,48,48,0.65)',
+      main: 'rgba(48,48,48,0.7)',
       light: 'rgba(48,48,48,0.15)',
       dark: 'rgba(48,48,48,0.87)',
     },
@@ -175,4 +175,25 @@ export const darkTheme: Theme = {
 export const breakpoint = {
   medium: device.mobileM,
   large: device.tablet,
+}
+
+export function getCurrentBreakpoint() {
+  let breakpoint = 'small'
+  let key = 'mobileS'
+
+  if (window) {
+    const innerWidth = window.innerWidth
+    const medium = size.mobileM
+    const large = size.tablet
+
+    if (innerWidth >= large) {
+      breakpoint = 'large'
+      key = 'tablet'
+    } else if (innerWidth >= medium) {
+      key = 'mobileM'
+      breakpoint = 'medium'
+    }
+  }
+
+  return { breakpoint, key }
 }
