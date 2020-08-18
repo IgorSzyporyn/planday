@@ -152,16 +152,16 @@ export const AppBody = () => {
           </motion.h3>
           <IconWrapper>
             <GridOnIcon
-              hover
-              variant="secondary"
               active={viewMode === 'grid'}
+              hover
               onClick={handleViewModeGrid}
+              variant="secondary"
             />
             <GridOffIcon
-              hover
               active={viewMode === 'list'}
-              variant="secondary"
+              hover
               onClick={handleViewModeList}
+              variant="secondary"
             />
           </IconWrapper>
         </UtilityBar>
