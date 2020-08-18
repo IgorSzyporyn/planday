@@ -84,8 +84,12 @@ export const AppBody = () => {
   const [viewMode, setViewMode] = useState<ViewModeTypes>('grid')
   const { loading, result, touched } = useApi()
 
-  const handleViewMode = () => {
-    setViewMode(viewMode === 'list' ? 'grid' : 'list')
+  const handleViewModeGrid = () => {
+    setViewMode('grid')
+  }
+
+  const handleViewModeList = () => {
+    setViewMode('list')
   }
 
   let images = result && result.data ? result.data : []
@@ -151,13 +155,13 @@ export const AppBody = () => {
               hover
               variant="secondary"
               active={viewMode === 'grid'}
-              onClick={handleViewMode}
+              onClick={handleViewModeGrid}
             />
             <GridOffIcon
               hover
               active={viewMode === 'list'}
               variant="secondary"
-              onClick={handleViewMode}
+              onClick={handleViewModeList}
             />
           </IconWrapper>
         </UtilityBar>
