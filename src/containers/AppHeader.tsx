@@ -68,10 +68,28 @@ export const AppHeader = () => {
   const [mounted, setMounted] = useState(false)
   const [avatarTop, setAvatarTop] = useState(false)
   const [infoLeft, setInfoLeft] = useState(false)
+  const [moveInfoLeft, setMoveInfoLeft] = useState(0)
   const { scrollY } = useViewportScroll()
+
+  const handleWindowSize = () => {
+    const { breakpoint } = getCurrentBreakpoint()
+    let moveLeft = -52
+
+    if (breakpoint === 'medium') {
+      moveLeft = -57
+    } else if (breakpoint === 'large') {
+      moveLeft = -72
+    }
+
+    setMoveInfoLeft(moveLeft)
+  }
 
   useEffect(() => {
     setMounted(true)
+
+    window.addEventListener('resize', handleWindowSize)
+
+    return () => window.removeEventListener('resize', handleWindowSize)
   }, [])
 
   useEffect(() => {
@@ -111,18 +129,9 @@ export const AppHeader = () => {
     },
   }
 
-  const { breakpoint } = getCurrentBreakpoint()
-  let infoMotionLeft = -52
-
-  if (breakpoint === 'medium') {
-    infoMotionLeft = -57
-  } else if (breakpoint === 'large') {
-    infoMotionLeft = -72
-  }
-
   const infoMotion = {
     normal: { x: 0 },
-    moveleft: { x: infoMotionLeft },
+    moveleft: { x: moveInfoLeft },
   }
 
   const avatarMotion = {

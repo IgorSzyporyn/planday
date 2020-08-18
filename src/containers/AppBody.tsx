@@ -22,7 +22,7 @@ const UtilityBar = styled(motion.section)`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: calc(var(--gutter) * 5);
+  margin-bottom: calc(var(--gutter) * 3);
 `
 
 const IconWrapper = styled.div`
@@ -34,7 +34,7 @@ const DataGrid = styled(motion.section)`
   flex-direction: row;
   flex-wrap: wrap;
 
-  & > div {
+  & > article {
     flex-basis: ${({ viewMode }: { viewMode: ViewModeTypes }) =>
       viewMode === 'list' ? '100%' : 'calc(50% - var(--spacing))'};
     margin-bottom: calc(var(--spacing) * 2);
@@ -108,10 +108,6 @@ export const AppBody = () => {
     show: { opacity: 1, y: 0 },
   }
 
-  const dataGridMotion = {
-    show: { opacity: 1 },
-  }
-
   const titleMotion = {
     hidden: { opacity: 0, y: 350 },
     show: { opacity: 1, y: 0 },
@@ -165,7 +161,7 @@ export const AppBody = () => {
         >
           Nothing To Show
         </NoResultsWrapper>
-        <DataGrid initial={false} animate="show" viewMode={viewMode} variants={dataGridMotion}>
+        <DataGrid viewMode={viewMode} transition={{ staggerChildren: 0.3, delayChildren: 0.3 }}>
           <AnimateSharedLayout>
             <AnimatePresence>
               {images.map((item) => {

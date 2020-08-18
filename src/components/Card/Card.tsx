@@ -1,5 +1,5 @@
-import { motion, MotionProps } from 'framer-motion'
-import React, { CSSProperties } from 'react'
+import { motion, MotionProps, MotionStyle } from 'framer-motion'
+import React from 'react'
 import styled from 'styled-components'
 import { ApiQueryData } from '../../api'
 import { breakpoint } from '../../theme'
@@ -12,8 +12,11 @@ const Wrapper = styled(motion.article)`
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
   overflow: hidden;
-  padding-top: 56.25%;
   position: relative;
+`
+
+const Inner = styled.div`
+  padding-top: 56.25%;
   width: 100%;
 `
 
@@ -89,21 +92,27 @@ export const Card = ({
   link,
   published,
   title,
+  style: sourceStyle,
   ...rest
 }: ApiQueryData & MotionProps) => {
-  const style: CSSProperties = {}
+  let style: MotionStyle = { ...sourceStyle }
 
   if (link) {
-    style.backgroundImage = `url(${link.href})`
+    style = {
+      ...sourceStyle,
+      backgroundImage: `url(${link.href})`,
+    }
   }
 
   return (
-    <motion.div
+    <Wrapper
+      style={style}
       initial={{ y: '70vh', opacity: 0 }}
       animate={{ y: 0, opacity: 1, transition: { delay: 0.3 } }}
       exit={{ y: '70vh', opacity: 0 }}
+      {...rest}
     >
-      <Wrapper style={style} {...rest}>
+      <Inner>
         <OpenLink {...link} target="_blank">
           <OpenLinkIcon />
         </OpenLink>
@@ -118,7 +127,7 @@ export const Card = ({
             </h5>
           </Info>
         </Panel>
-      </Wrapper>
-    </motion.div>
+      </Inner>
+    </Wrapper>
   )
 }
