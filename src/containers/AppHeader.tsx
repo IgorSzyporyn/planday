@@ -128,7 +128,7 @@ export const AppHeader = () => {
             animate={mounted ? 'show' : 'hidden'}
             variants={subTitleMotion}
           >
-            Igor Szyporyn Jørgensen
+            by Igor Szyporyn Jørgensen
           </motion.h2>
         </div>
       </Presentation>
