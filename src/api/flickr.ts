@@ -113,7 +113,7 @@ export const flickrQuery = async (_query: string = '') => {
   const response = await fetch(url, {
     method: 'GET',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/xml',
     },
   })
 
