@@ -1,3 +1,11 @@
+import { device } from './device'
+
+export type WithTheme<T = {}> = {
+  theme: Theme
+} & T
+
+export type ThemePaletteVariantType = keyof ThemePalette
+
 export type ThemePaletteVariants = {
   main: string
   light: string
@@ -10,7 +18,7 @@ export type ThemePalette = {
   success: ThemePaletteVariants
   failure: ThemePaletteVariants
   info: ThemePaletteVariants
-  text: ThemePaletteVariants & { inverse: ThemePaletteVariants }
+  text: ThemePaletteVariants & { inverse: ThemePaletteVariants; bright: string }
   border: ThemePaletteVariants
 }
 
@@ -22,6 +30,10 @@ export type Theme = {
   }
   boxShadow: string
   borderRadius: string
+  overlay: {
+    default: ThemePaletteVariants
+    paper: ThemePaletteVariants
+  }
   spacing: (mod?: number) => string
 }
 
@@ -59,9 +71,10 @@ export const lightTheme: Theme = {
       dark: '#c8b900',
     },
     text: {
-      main: 'rgb(0, 0, 0, 0.87)',
-      light: 'rgb(0, 0, 0, 0.72)',
-      dark: 'rgb(0, 0, 0, 0.87)',
+      bright: 'rgb(0,0,0,1)',
+      main: 'rgb(0,0,0,0.87)',
+      light: 'rgb(0,0,0,0.72)',
+      dark: 'rgb(0,0,0,0.87)',
       inverse: {
         main: 'rgb(255, 255, 255, 0.87)',
         light: 'rgb(255, 255, 255, 0.72)',
@@ -77,6 +90,18 @@ export const lightTheme: Theme = {
   background: {
     default: '#ffffff',
     paper: '#fafafa',
+  },
+  overlay: {
+    default: {
+      main: 'rgba(255,255,255,0.65)',
+      light: 'rgba(255,255,255,0.15)',
+      dark: 'rgba(255,255,255,0.87)',
+    },
+    paper: {
+      main: 'rgba(250,250,250,0.65)',
+      light: 'rgba(250,250,250,0.15)',
+      dark: 'rgba(250,250,250,0.87)',
+    },
   },
   boxShadow:
     '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)',
@@ -111,13 +136,14 @@ export const darkTheme: Theme = {
       dark: '#c7cc00',
     },
     text: {
-      main: 'rgb(255, 255, 255, 0.87)',
-      light: 'rgb(255, 255, 255, 0.72)',
-      dark: 'rgb(255, 255, 255, 0.87)',
+      bright: 'rgb(255,255,255,1)',
+      main: 'rgb(255,255,255,0.87)',
+      light: 'rgb(255,255,255,0.72)',
+      dark: 'rgb(255,255,255,0.87)',
       inverse: {
-        main: 'rgb(0, 0, 0, 0.87)',
-        light: 'rgb(0, 0, 0, 0.72)',
-        dark: 'rgb(0, 0, 0, 0.87)',
+        main: 'rgb(0,0,0,0.87)',
+        light: 'rgb(0,0,0,0.72)',
+        dark: 'rgb(0,0,0,0.87)',
       },
     },
     border: {
@@ -126,10 +152,27 @@ export const darkTheme: Theme = {
       dark: 'rgb(255, 255, 255, 0.45)',
     },
   },
+  overlay: {
+    default: {
+      main: 'rgba(48,48,48,0.65)',
+      light: 'rgba(48,48,48,0.15)',
+      dark: 'rgba(48,48,48,0.87)',
+    },
+    paper: {
+      main: 'rgba(66,66,66,0.65)',
+      light: 'rgba(66,66,66,0.15)',
+      dark: 'rgba(66,66,66,0.87)',
+    },
+  },
   background: {
     default: '#303030',
     paper: '#424242',
   },
   boxShadow:
     '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)',
+}
+
+export const breakpoint = {
+  medium: device.mobileM,
+  large: device.tablet,
 }

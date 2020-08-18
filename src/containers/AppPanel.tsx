@@ -1,11 +1,12 @@
 import React, { ReactNode } from 'react'
 import styled from 'styled-components'
-import { WithTheme } from '../types/WithTheme'
 
 const Wrapper = styled.section`
-  border-radius: ${({ theme }: WithTheme) => theme.borderRadius};
-  background-color: ${({ theme }: WithTheme) => theme.background.paper};
-  box-shadow: ${({ theme }: WithTheme) => theme.boxShadow};
+  border-radius: var(--border-radius);
+  background-color: var(--background-paper);
+  box-shadow: var(--box-shadow);
+  max-width: 1140px;
+  width: 100%;
 `
 
 type AppPanelProps = {

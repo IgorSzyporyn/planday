@@ -1,46 +1,150 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { SearchPanel } from '../components/SearchPanel/SearchPanel'
-import { WithTheme } from '../types/WithTheme'
 import avatar from '../images/avatar.jpg'
+import { breakpoint } from '../theme'
+import { motion } from 'framer-motion'
 
 const Wrapper = styled.header`
-  border-bottom: ${({ theme }: WithTheme) => `1px solid ${theme.palette.border.light}`};
+  padding-left: calc(var(--gutter) * 5);
+  padding-right: calc(var(--gutter) * 5);
+  padding-top: calc(var(--gutter) * 5);
+  position: sticky;
+  top: 0;
+  z-index: 99999;
+  background-image: linear-gradient(
+    180deg,
+    var(--background-paper) 0%,
+    var(--overlay-paper-dark) 77%,
+    rgba(0, 0, 0, 0) 100%
+  );
+`
+
+const BorderWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`
+
+const Border = styled(motion.hr)`
+  margin: 0 0 calc(var(--spacing-large) * 5) 0;
+  height: 0.1rem;
+  border: 0 none;
+  background-color: var(--color-border-light);
+  border-bottom: 1px solid var(--color-border);
 `
 
 const Presentation = styled.div`
-  padding-left: ${({ theme }: WithTheme) => theme.spacing(2)};
-  padding-right: ${({ theme }: WithTheme) => theme.spacing(2)};
-  padding-top: ${({ theme }: WithTheme) => theme.spacing(2)};
-  margin-bottom: ${({ theme }: WithTheme) => theme.spacing(3)};
+  margin-bottom: calc(var(--gutter) * 5);
   display: flex;
   flex-direction: row;
+  align-items: center;
 `
 
-const Avatar = styled.img`
-  margin-right: ${({ theme }: WithTheme) => theme.spacing(2)};
+const Avatar = styled(motion.img)`
+  margin-right: var(--spacing-large);
   border-radius: 100%;
-  width: ${({ theme }: WithTheme) => theme.spacing(6.5)};
-  height: ${({ theme }: WithTheme) => theme.spacing(6.5)};
+  width: auto;
+  height: 4rem;
+
+  @media ${breakpoint.medium} {
+    height: 4.6rem;
+  }
+
+  @media ${breakpoint.large} {
+    height: 5.8rem;
+  }
 `
 
-const Functionality = styled.div`
-  padding-left: ${({ theme }: WithTheme) => theme.spacing(10.5)};
+const SearchMotion = styled.div`
+  overflow: hidden;
+  margin-left: calc(var(--gutter) * -5);
+  margin-right: calc(var(--gutter) * -5);
+  padding-left: calc(var(--gutter) * 5);
+  padding-right: calc(var(--gutter) * 5);
 `
 
 export const AppHeader = () => {
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  const titleMotion = {
+    hidden: { opacity: 0, y: -80 },
+    show: {
+      y: 0,
+      opacity: 1,
+      transition: { type: 'spring', stiffness: 400, mass: 1.1, damping: 10 },
+    },
+  }
+
+  const subTitleMotion = {
+    hidden: { opacity: 0, y: -100 },
+    show: {
+      y: 0,
+      opacity: 1,
+      transition: { type: 'spring', stiffness: 400, delay: 0.2, mass: 1.1, damping: 10 },
+    },
+  }
+
+  const avatarMotion = {
+    hidden: { opacity: 0, y: -100 },
+    show: {
+      y: 0,
+      opacity: 1,
+      transition: { type: 'spring', stiffness: 400, delay: 0.4, mass: 1.1, damping: 10 },
+    },
+  }
+
+  const borderMotion = {
+    hidden: { flexBasis: '0%' },
+    show: { flexBasis: '100%', transition: { type: 'spring', stiffness: 400, delay: 0.4 } },
+  }
+
+  const searchMotion = {
+    hidden: { x: -2250, opacity: 0 },
+    show: { x: 0, opacity: 1, transition: { delay: 0.8 } },
+  }
+
   return (
     <Wrapper>
       <Presentation>
-        <Avatar src={avatar} />
+        <a href="https://npmjs.org/package/igor-szyporyn" rel="noopener noreferrer" target="_blank">
+          <Avatar
+            src={avatar}
+            initial="hidden"
+            animate={mounted ? 'show' : 'hidden'}
+            variants={avatarMotion}
+          />
+        </a>
         <div>
-          <h1>Planday Front End Challenge</h1>
-          <h2>Igor Szyporyn Jørgensen</h2>
+          <motion.h1 initial="hidden" animate={mounted ? 'show' : 'hidden'} variants={titleMotion}>
+            Planday Code Challenge
+          </motion.h1>
+          <motion.h2
+            initial="hidden"
+            animate={mounted ? 'show' : 'hidden'}
+            variants={subTitleMotion}
+          >
+            Igor Szyporyn Jørgensen
+          </motion.h2>
         </div>
       </Presentation>
-      <Functionality>
-        <SearchPanel />
-      </Functionality>
+      <SearchMotion>
+        <motion.div initial="hidden" animate={mounted ? 'show' : 'hidden'} variants={searchMotion}>
+          <SearchPanel />
+        </motion.div>
+      </SearchMotion>
+      <BorderWrapper>
+        <Border
+          initial="hidden"
+          animate={mounted ? 'show' : 'hidden'}
+          variants={borderMotion}
+          transition={{ duration: 0.35, ease: 'easeIn' }}
+        />
+      </BorderWrapper>
     </Wrapper>
   )
 }

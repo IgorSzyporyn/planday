@@ -3,18 +3,29 @@ import styled, { ThemeProvider } from 'styled-components'
 import { AppBody } from './containers/AppBody'
 import { AppHeader } from './containers/AppHeader'
 import { AppPanel } from './containers/AppPanel'
-import { darkTheme, lightTheme } from './styles/theme'
-import { WithTheme } from './types/WithTheme'
-import 'reset-css'
-import 'roboto-fontface'
+import { GlobalStyle } from './styles/GlobalStyle'
+import { breakpoint, darkTheme, lightTheme } from './theme'
 
 const AppWrapper = styled.div`
-  background-color: ${({ theme }: WithTheme) => theme.background.default};
-  box-sizing: border-box;
-  color: ${({ theme }: WithTheme) => theme.palette.text.main};
-  height: 100%;
-  min-height: 100%;
-  padding: 4vh 8vw;
+  background-color: var(--background-default);
+  color: var(--color-text-main);
+  min-height: 100vh;
+  padding: 0;
+  font-size: 1.4rem;
+  display: flex;
+  justify-content: center;
+
+  @media ${breakpoint.large} {
+    padding: 4vh 4vw 0;
+  }
+
+  & > * {
+    min-height: 100vh;
+
+    @media ${breakpoint.large} {
+      min-height: 96vh;
+    }
+  }
 `
 
 type StateTypes = 'light' | 'dark'
@@ -35,6 +46,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      <GlobalStyle />
       <AppWrapper>
         <AppPanel>
           <AppHeader />
