@@ -111,7 +111,7 @@ export const AppHeader = () => {
   return (
     <Wrapper>
       <Presentation>
-        <a href="https://npmjs.org/package/igor-szyporyn" rel="noopener noreferrer" target="_blank">
+        <a href="https://github.com/IgorSzyporyn/planday" rel="noopener noreferrer" target="_blank">
           <Avatar
             src={avatar}
             initial="hidden"
