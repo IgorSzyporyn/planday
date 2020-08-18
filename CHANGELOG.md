@@ -1,8 +1,7 @@
-#### 1.0.6 (2020-08-18)
+#### 1.0.7 (2020-08-18)
 
 ##### Bug Fixes
 
-*  less margin for header (7ccb29c0)
-*  right application type in fetch response (57473f44)
-*  button still toggling views (c6934779)
+*  using findallrelastedtests for husky (492e4765)
+*  link to the repo instead of to my page (32152e7c)
 
