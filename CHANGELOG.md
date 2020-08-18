@@ -1,6 +1,7 @@
-## 1.0.0 (2020-08-18)
+#### 1.0.1 (2020-08-18)
 
-##### New Features
+##### Bug Fixes
 
-* **project:**  ready to deliver - but want more (f012c465)
+*  favicons (57ebfaa9)
+*  last min fixes for margin bottom of presentation and tidying code (35ddceb3)
 
